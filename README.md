@@ -33,3 +33,20 @@ For more detailed information, please refer to the `docs/` folder, which include
 - `folder-structure.md`: Details on the recommended project structure.
 - `node-definition.md`: Guidelines for defining Node-RED nodes.
 - `publishing.md`: Steps for publishing to NPM and updating versions.
+
+## Adding This Project as a Git Submodule
+
+1. Navigate to your repository:
+   ```bash
+   cd /path/to/your/repository
+   ```
+
+2. Add this project:
+   ```bash
+   git submodule add https://github.com/404background/node-create-guidelines.git node-create-guidelines
+   ```
+
+3. Initialize and update:
+   ```bash
+   git submodule update --init --recursive
+   ```
