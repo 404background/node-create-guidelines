@@ -48,5 +48,5 @@ For more detailed information, please refer to the `docs/` folder, which include
 
 3. Initialize and update:
    ```bash
-   git submodule update --init --recursive
+   git pull
    ```
