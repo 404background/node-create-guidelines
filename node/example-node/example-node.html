@@ -1,0 +1,30 @@
+<script type="text/javascript">
+    RED.nodes.registerType('example-node', {
+        category: 'function',
+        color: '#a6bbcf',
+        defaults: {
+            name: { value: '' },
+            greeting: { value: '' }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: 'node-red/function.png',
+        label: function() {
+            return this.name || this._('example-node.label');
+        },
+        oneditprepare: function() {
+            $('#node-input-greeting').attr('placeholder', this._('example-node.greeting_default'));
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="example-node">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="example-node.name"></span></label>
+        <input type="text" id="node-input-name" placeholder="">
+    </div>
+    <div class="form-row">
+        <label for="node-input-greeting"><i class="fa fa-comment"></i> <span data-i18n="example-node.greeting"></span></label>
+        <input type="text" id="node-input-greeting" placeholder="">
+    </div>
+</script>

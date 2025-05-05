@@ -1,0 +1,9 @@
+{
+    "example-node": {
+        "label": "Example Node",
+        "name": "Name",
+        "greeting": "Greeting",
+        "help": "A node that outputs the configured greeting message.",
+        "greeting_default": "Hello, World!"
+    }
+}

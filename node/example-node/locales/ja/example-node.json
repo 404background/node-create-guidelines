@@ -1,0 +1,9 @@
+{
+    "example-node": {
+        "label": "サンプルノード",
+        "name": "名前",
+        "greeting": "挨拶",
+        "help": "設定された挨拶メッセージを出力するノードです。",
+        "greeting_default": "こんにちは、世界！"
+    }
+}

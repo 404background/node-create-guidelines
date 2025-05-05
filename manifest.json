@@ -1,0 +1,6 @@
+{
+    "modules": [
+        "example-node/example-node.js"
+    ],
+    "preload": []
+}

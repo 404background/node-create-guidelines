@@ -1,0 +1,19 @@
+{
+    "name": "node-create-guidelines",
+    "version": "1.0.0",
+    "description": "Guidelines and templates for creating Node-RED nodes.",
+    "main": "node/index.js",
+    "keywords": [
+        "node-red",
+        "node-red-node",
+        "example"
+    ],
+    "author": "background404",
+    "license": "MIT",
+    "node-red": {
+        "nodes": {
+            "example-node": "node/example-node/example-node.js"
+        }
+    },
+    "dependencies": {}
+}
