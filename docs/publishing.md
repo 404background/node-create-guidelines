@@ -2,6 +2,15 @@
 
 This document explains how to publish a Node-RED node to NPM and register it in the Flow Library.
 
+## Before Publishing
+- List the published files in the `files` field of `package.json` (this template publishes `node/`, `examples/`, `manifest.json`, `README.md` and `LICENSE`). Without it, everything not ignored is published, including local logs and git submodules such as this one.
+- Check the contents of the package:
+  ```bash
+  npm pack --dry-run
+  ```
+- Do not exclude `examples/`: Node-RED lists the flows in it under Import → Examples.
+- Set `node-red.version` (the oldest Node-RED the node supports) and `engines.node` in `package.json`.
+
 ## Steps to Publish
 1. Log in to NPM:
    ```bash

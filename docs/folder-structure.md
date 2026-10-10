@@ -12,6 +12,7 @@ node-create-guidelines/
 ├── node/                    # Template implementation directory for nodes  
 │   ├── <node-name>/         
 │   │   ├── <node-name>.js   # Runtime implementation template  
+│   │   ├── <node-name>_mcu.js # Node-RED MCU runtime (MCU nodes only)  
 │   │   ├── <node-name>.html # Editor UI definition template  
 │   │   └── locales/         # i18n dictionary folder (recommended)  
 │   └── index.js             # Entry point for registering all nodes  
