@@ -18,6 +18,11 @@ node-create-guidelines/
 │   └── index.js             # Entry point for registering all nodes  
 ├── examples/                # Sample flows (JSON)  
 ├── images/                  # Visual representations of sample flows  
+├── docs/                    # Usage and specification (en / ja), optional  
+└── test/                    # Tests (npm test), Moddable-only test project for MCU nodes  
 ```
+
+MCU nodes also have a `native/` folder for shared classes, XS in C and per-board settings; see [mcu-nodes.md](mcu-nodes.md#project-layout).
+Name each node folder and its files after the node type (`node/<type>/<type>.js`), so that Node-RED finds `locales/<lang>/<type>.json`.
 
 This structure ensures clarity and maintainability for both developers and users.

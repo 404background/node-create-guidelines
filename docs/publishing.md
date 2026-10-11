@@ -10,6 +10,10 @@ This document explains how to publish a Node-RED node to NPM and register it in 
   ```
 - Do not exclude `examples/`: Node-RED lists the flows in it under Import → Examples.
 - Set `node-red.version` (the oldest Node-RED the node supports) and `engines.node` in `package.json`.
+- Check that `.gitignore` is not what keeps files out of the package: reference clones (`moddable/`, ...) and `.claude/` must be left out by `files`. `npm pack --dry-run` warns `gitignore-fallback` when `files` is missing.
+- README: requirements (supported boards, SDK versions, patches), install, nodes, connection / pairing steps, example, license. Keep the same steps in the configuration node's help.
+- Provide `en-US` and `ja` locales with the same keys.
+- Say what was verified on hardware and what was only built (see [mcu-nodes.md](mcu-nodes.md#testing)).
 
 ## Steps to Publish
 1. Log in to NPM:

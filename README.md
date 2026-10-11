@@ -33,6 +33,7 @@ For more detailed information, please refer to the `docs/` folder, which include
 
 - `folder-structure.md`: Details on the recommended project structure.
 - `node-definition.md`: Guidelines for defining Node-RED nodes.
+- `mcu-nodes.md`: Nodes for Node-RED MCU Edition: design patterns, manifest, native code, board notes and testing.
 - `publishing.md`: Steps for publishing to NPM and updating versions.
 
 ## Adding This Project as a Git Submodule

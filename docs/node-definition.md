@@ -44,7 +44,8 @@ Nodes should:
 - Follow the [Node-RED Internationalisation Guide](https://nodered.org/docs/creating-nodes/i18n) for best practices.
 
 ## Nodes for Node-RED MCU Edition
-A node that runs on a microcontroller with [Node-RED MCU Edition](https://github.com/phoddie/node-red-mcu) has two runtime files:
+A node that runs on a microcontroller with [Node-RED MCU Edition](https://github.com/phoddie/node-red-mcu) has two runtime files.
+Design patterns, native code, ESP-IDF components, per-board settings and testing are in [mcu-nodes.md](mcu-nodes.md).
 
 | File | Runs on | Registered in |
 |------|---------|---------------|
