@@ -38,12 +38,15 @@ node-red-contrib-mcu-<name>/
 - **Queue output that takes time** (typing, sending frames) and call `done()` when it has finished, then `send(msg)` so flows can chain. Report failures with `done(error)`.
 - **Optional features as separate modules.** Load them with `Modules.has(specifier)` / `Modules.importNow(specifier)` (include `$(MODDABLE)/modules/base/modules/manifest.json` in a Moddable-only test; node-red-mcu includes it). A board that lacks the feature then reports an error instead of failing the build.
 - **Freeze constant tables** (`Object.freeze`, recursively for nested objects). Preloaded modules keep them in flash, and the build stops printing `not frozen` warnings. A module-level `let` (singleton) gives a `no const` warning; that is expected.
+- **Objects made at module level of a preloaded module are read-only (in ROM).** Passing one to `status()`, `send()` or `JSON.stringify` aborts XS with `read only value (in stringify)`: pass a copy (`{ ...STATUS[state] }`). A module-level `Map` / `Set` cannot be written: declare `let cache;` and create it on first use (`cache ??= new Map`). Module-level code such as `Date.now()` runs at build time.
 - **Return errors from native functions, do not throw**: a throw also stops in xsbug. JavaScript turns the returned message into `this.error()` / status.
 
 ## manifest.json
 
 - Module names without extensions. A `.c` file listed under `"*"` is compiled as native code; give it a base name different from the JavaScript module (`hid_usb.js` + `hid_usb_native.c`).
 - Do not include `$(MODDABLE)/examples/manifest_base.json` in the node's manifest (the application includes it). A Moddable-only test project includes it.
+- Do not put `moddable_manifest` in the node's `.html` defaults or in example flows. Moddable's `mcmanifest.js` reads it from the flow: a `{"git": ...}` include clones the repository on every build and includes the package twice (it fails offline and for private repositories). node-red-mcu-plugin already finds the package's `manifest.json`.
+- Include everything the MCU files import. Do not rely on modules such as `pins/digital` being there: build for the target to check.
 - **`platforms` match the build target**, not the chip: `-p esp32/xiao_esp32s3` matches `"esp32/xiao_esp32s3"`, then `"esp32"`, then `"..."`. List the targets a chip-specific feature supports, and end with `"...": { "error": "..." }` for unsupported platforms.
 - A platform block can `include` other manifests, which keeps per-feature files small (`native/ble/manifest.json`, `native/usb/manifest.json`).
 - **ESP-IDF components** (component manager) are added with `dependency` inside an `esp32` platform block. `namespace` defaults to `espressif`. Header directories of the component (other than `include/`) and of components it depends on are not on the include path: add them with their own entry and `includes`.
@@ -79,7 +82,8 @@ node-red-contrib-mcu-<name>/
 1. **Node.js tests** of the MCU modules: strip the `import` lines, pass mocks (`Timer`, `Modules`, the transport) and run the class with `new Function(...)`. Run them with `npm test`.
 2. **Build without a board**: `mcconfig -m -p <target> -t build` (add `-d` for a debug build). Build every supported target, including the "BLE only" / fallback ones. Check that native symbols are linked with `xtensa-esp32s3-elf-nm build/xs_esp32.elf`.
 3. **Moddable-only test project** (`test/moddable`) on the board, without Node-RED: isolates the native part.
-4. **Node-RED MCU** with the sample flow on the board.
-5. **Editor**: install the package into a Node-RED 4 user directory and check `/nodes` (templates, help) and `/locales/<module>/<type>` with `Accept-Language: ja`.
+4. **Node-RED MCU** with the sample flow on the board. Without a board, the flow can run in the Moddable simulator (`mcconfig -d -m -p lin`, `mcsim`) with the hardware replaced by mocks and an xsbug stand-in on port 5002; with `"config": {"noderedmcu": {"editor": true}}` the runtime reports each node's status, warnings, errors and debug output there.
+5. **Example flows** in their own tab with `"_mcu": {"mcu": true}` on the tab and the nodes, so an import is an MCU flow straight away.
+6. **Editor**: install the package into a Node-RED 4 user directory and check `/nodes` (templates, help) and `/locales/<module>/<type>` with `Accept-Language: ja`.
 
 Note in the README and commit what was verified on hardware and what was only built.
